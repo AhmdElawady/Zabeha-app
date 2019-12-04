@@ -22,14 +22,24 @@ class AuthAPI {
         
         Alamofire.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                if let userID = json["user"]["id"].int {
+                    Helper.saveUserID(userID: userID)
+                    print("userID\(userID)")
+                }
+                let stat = json["stat"].intValue
+                print(stat)
+                if stat != 200 {
+                    completion(false)
+                    return
+                }else {
+                   completion(true)
+                }
+                
             case .failure(let error):
                 debugPrint(error)
                 completion(false)
-                
-            case .success(let value):
-                let json = JSON(value)
-                print(json)
-                completion(true)
             }
         }
     }
@@ -48,14 +58,13 @@ class AuthAPI {
             ]
         Alamofire.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: nil) .responseJSON { (response) in
             switch response.result {
-            case .failure(let error):
-                debugPrint(error)
-                completion(false)
+                case .success(let value):
+                    print(value)
+                    completion(true)
                 
-            case .success(let value):
-                let json = JSON(value)
-                print(json)
-                completion(true)
+                case .failure(let error):
+                    debugPrint(error)
+                    completion(false)
 
             }
         }

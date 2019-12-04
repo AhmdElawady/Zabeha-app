@@ -21,6 +21,7 @@ class SigninViewController: UIViewController {
     }
     
     @IBAction func loginPressed(_ sender: Any) {
+        
         guard let email = emailTextField.text, !email.isEmpty else {
             Alert.showBasic(title: "Incomplete Form", message: "Please fill out all fields", vc: self)
             return
@@ -28,21 +29,23 @@ class SigninViewController: UIViewController {
         if email.isValideEmail == false {
             Alert.showBasic(title: "Invalide Email Formate", message: "Please make sure you formate your mail correctly", vc: self)
         }
-        
-        guard let password = passwordTextField.text, !password.isEmpty, password.count >= 8 else {
+
+        guard let password = passwordTextField.text, !password.isEmpty, password.count >= 3 else {
             Alert.showBasic(title: "Password Too Short", message: "Password should be at least 8 characters", vc: self)
             return
         }
-        
+
         AuthAPI.signin(email: email, password: password) { (Success) in
             if Success == true {
                 print("Your logged in successfully")
-                self.dismiss(animated: true, completion: nil)
+                let view = self.storyboard?.instantiateViewController(withIdentifier: "HomeTabBarController") as! HomeTabBarController
+                self.present(view, animated: true, completion: nil)
+                
             }else {
                 return
             }
         }
-
+        self.dismiss(animated: true, completion: nil)
     }
     
     func setupCloseTouch() {

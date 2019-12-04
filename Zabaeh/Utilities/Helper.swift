@@ -8,21 +8,20 @@
 
 import Foundation
 
-//class Helper {
-//    
-//    class func saveApiToken(token: String) {
-//        
-//        let defoult = UserDefaults.standard
-//        //save auth_token to UserDefoult
-//        defoult.setValue(token, forKey: "token")
-//        defoult.synchronize()
-//        
-//    }
-//    
-//    class func getAuthToken() -> String? {
-//        
-//        let defoult = UserDefaults.standard
-//        
-//        return defoult.object(forKey: "token") as? String
-//    }
-//}
+class Helper {
+    
+    class func saveUserID(userID: Int) {
+        
+        let defoult = UserDefaults.standard
+        //save UserID to UserDefoult
+        defoult.setValue(userID, forKey: "id")
+        defoult.synchronize()
+        
+    }
+    
+    class func getAuthToken() -> Int? {
+        
+        let defoult = UserDefaults.standard
+        return defoult.object(forKey: "id") as? Int
+    }
+}

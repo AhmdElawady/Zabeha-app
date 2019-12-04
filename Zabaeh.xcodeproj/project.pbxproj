@@ -11,6 +11,7 @@
 		C20444F2238C135300D62736 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20444F1238C135300D62736 /* HomeTabBarController.swift */; };
 		C20444F4238C188700D62736 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20444F3238C188700D62736 /* HomeModel.swift */; };
 		C208A868238D74B7004C4D8F /* PurpleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C208A867238D74B7004C4D8F /* PurpleViewController.swift */; };
+		C2111E2823957B5A007F50B0 /* CartAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2111E2723957B5A007F50B0 /* CartAPI.swift */; };
 		C24C4B1D23830AE600EED244 /* HomeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24C4B1B23830AE600EED244 /* HomeCollectionCell.swift */; };
 		C24C4B1E23830AE600EED244 /* HomeCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C24C4B1C23830AE600EED244 /* HomeCollectionCell.xib */; };
 		C24C4B2023841FFB00EED244 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24C4B1F23841FFB00EED244 /* RoundedButton.swift */; };
@@ -49,6 +50,7 @@
 		C20444F1238C135300D62736 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
 		C20444F3238C188700D62736 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		C208A867238D74B7004C4D8F /* PurpleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurpleViewController.swift; sourceTree = "<group>"; };
+		C2111E2723957B5A007F50B0 /* CartAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartAPI.swift; sourceTree = "<group>"; };
 		C24C4B1B23830AE600EED244 /* HomeCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionCell.swift; sourceTree = "<group>"; };
 		C24C4B1C23830AE600EED244 /* HomeCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCollectionCell.xib; sourceTree = "<group>"; };
 		C24C4B1F23841FFB00EED244 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				C2649694238ABC5A00B8A245 /* AuthAPI.swift */,
 				C2EBAC5023905F2F00165CBE /* HomeAPI.swift */,
 				C2EBAC522390613700165CBE /* ProductAPI.swift */,
+				C2111E2723957B5A007F50B0 /* CartAPI.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2111E2823957B5A007F50B0 /* CartAPI.swift in Sources */,
 				C269CCB0238F3AD100C7EE90 /* ValidateFactory.swift in Sources */,
 				C28E5CD82384543200A7C2AD /* CartCell.swift in Sources */,
 				C2649693238ABC0A00B8A245 /* URLS.swift in Sources */,

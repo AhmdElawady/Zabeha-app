@@ -15,11 +15,11 @@ class ProductCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
     
     func configCell(productData: ProductModel) {
-        if let image = productData.Image {
+        self.productNameLabel.text = productData.textOfImage
+        if let image = productData.image {
             productImage.kf.indicatorType = .activity
             self.productImage.kf.setImage(with: URL(string: image))
         }
@@ -28,7 +28,6 @@ class ProductCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
     
 }

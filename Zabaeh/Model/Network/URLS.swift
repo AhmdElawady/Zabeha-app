@@ -14,6 +14,7 @@ struct URLS {
     static let signinURL = "\(baseURL)/login"
     static let registerURL = "\(baseURL)/register"
     static let homeURL = "\(baseURL)/home"
+    static let categoryURL = "\(baseURL)/category"
     static let productURL = "\(baseURL)/product"
-
+    static let cartURL = "\(baseURL)/cart"
 }

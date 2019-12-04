@@ -50,10 +50,10 @@ class HomeViewController: UIViewController {
     
     func configData() {
 
-        HomeAPI.instance.homeData { (Success) in
+        HomeAPI.instance.FetchHomeData { (Success) in
 
             if  Success == true {
-                print("Passed")
+                print("You are in home page")
                 self.sliderData = HomeAPI.instance.sliderData
                 self.homeData = HomeAPI.instance.homeData
                 
@@ -102,10 +102,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.homeCollectionView {
-            
-            
-        let view = self.storyboard?.instantiateViewController(withIdentifier: "ProductViewController") as! ProductViewController
-        self.navigationController?.pushViewController(view, animated: true)
+            let view = self.storyboard?.instantiateViewController(withIdentifier: "ProductViewController") as! ProductViewController
+            view.categoryID = self.homeData[indexPath.row].id ?? ""
+            self.navigationController?.pushViewController(view, animated: true)
         }
     }
     
@@ -114,3 +113,4 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         pageControl?.currentPage = curruntIndex
     }
 }
+

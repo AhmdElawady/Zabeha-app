@@ -39,6 +39,7 @@ class SignupViewController: UIViewController {
             return
         }
         guard let repassword = rePasswordTextField.text else {return}
+        
         if password != repassword {
             Alert.showBasic(title: "Wrong Password Confirmation", message: "Password Confirmation must be equal password", vc: self)
             return

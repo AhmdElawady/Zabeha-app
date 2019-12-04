@@ -12,7 +12,19 @@ import UIKit
 struct ProductModel {
     
     var id: String?
-    var Image: String?
+    var image: String?
     var textOfImage: String?
     var price: String?
+    var maxCount: String?
+    var category: String?
+}
+
+struct CartModel {
+    
+    var id: String?
+    var image: String?
+    var textOfImage: String?
+    var price: String?
+    var maxCount: String?
+    var category: String?
 }
