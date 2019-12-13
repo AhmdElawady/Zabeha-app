@@ -21,6 +21,7 @@ class HomeAPI {
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result {
+                
             case .failure(let error):
                 debugPrint(error)
                 

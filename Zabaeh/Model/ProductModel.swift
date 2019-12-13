@@ -21,10 +21,12 @@ struct ProductModel {
 
 struct CartModel {
     
-    var id: String?
+    var id: Int?
     var image: String?
     var textOfImage: String?
     var price: String?
     var maxCount: String?
     var category: String?
+    var created_at: String?
+    var updated_at: String?
 }

@@ -17,7 +17,10 @@ class CartCell: UICollectionViewCell {
     @IBOutlet weak var stepperCounter: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     
-    var cartStippermodel: CartModel?
+    var cartStippermodel = CartModel()
+    
+    var oldCount = 0
+    var delegate: CartViewCellDelegate!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,8 +37,16 @@ class CartCell: UICollectionViewCell {
     }
     
     @IBAction func stepperPressed(_ sender: Any) {
+        if oldCount > Int(stepper.value) {
+            delegate.onAmountChange(newAmount: Int(stepper.stepValue * Double((cartStippermodel.price)!)!), state: .minus)
+        }
+        else {
+            delegate.onAmountChange(newAmount: Int(stepper.stepValue * Double((cartStippermodel.price)!)!), state: .plus)
+        }
+        
+        
         stepperCounter.text = String(Int(stepper.value))
-        let priceText = Int(stepper.value) * (Int(cartStippermodel?.price ?? "") ?? 0)
+        let priceText = Int(stepper.value) * (Int(cartStippermodel.price ?? "") ?? 0)
         priceLabel.text = String(priceText)
     }
 }

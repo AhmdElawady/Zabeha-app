@@ -40,6 +40,7 @@ class HomeViewController: UIViewController {
         startTimer()    
     }
     
+    
     func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
     }
@@ -49,9 +50,7 @@ class HomeViewController: UIViewController {
     }
     
     func configData() {
-
         HomeAPI.instance.FetchHomeData { (Success) in
-
             if  Success == true {
                 print("You are in home page")
                 self.sliderData = HomeAPI.instance.sliderData

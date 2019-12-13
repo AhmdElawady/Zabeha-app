@@ -32,6 +32,7 @@ class ProductAPI {
                     completion(false)
                     return
                 }
+                    self.categoryData = []
                 for item in productArray {
                     guard let item = item.dictionary else {
                         completion(false)

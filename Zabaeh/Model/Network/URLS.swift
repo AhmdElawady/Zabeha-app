@@ -17,4 +17,5 @@ struct URLS {
     static let categoryURL = "\(baseURL)/category"
     static let productURL = "\(baseURL)/product"
     static let cartURL = "\(baseURL)/cart"
+    static let orderURL = "\(baseURL)/endorder"
 }

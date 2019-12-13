@@ -43,7 +43,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" wraps="YES" value="1" minimumValue="1" maximumValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="oXP-hY-qfb">
+                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="oXP-hY-qfb">
                                                 <rect key="frame" x="20" y="0.0" width="94" height="32"/>
                                                 <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>

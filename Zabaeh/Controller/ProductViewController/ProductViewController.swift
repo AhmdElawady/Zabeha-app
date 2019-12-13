@@ -18,13 +18,13 @@ class ProductViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(categoryID)
         configeData()
         productTableView.delegate = self
         productTableView.dataSource = self
         
         let productNib = UINib(nibName: "ProductCell", bundle: nil)
         productTableView.register(productNib, forCellReuseIdentifier: "ProductCell")
+        self.productTableView.separatorColor = .clear
     }
     
     func configeData() {
@@ -45,7 +45,6 @@ extension ProductViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProductCell") as! ProductCell
         cell.configCell(productData: productData[indexPath.row])
-        
         return cell
     }
     
@@ -59,7 +58,7 @@ extension ProductViewController: UITableViewDelegate, UITableViewDataSource {
         let yesAction = UIAlertAction(title: "Yes", style: .default) { (_) in
             ProductAPI.instance.productData(id: self.productId, userID: self.userID!) { (Success) in
                 if Success {
-                    self.productTableView.reloadData()
+//                    self.productTableView.reloadData()
                     print("product ID \(self.productId), user ID \(String(describing: self.userID))")
                 }
             }
