@@ -13,8 +13,8 @@ import SwiftyJSON
 class CartAPI {
     
     static let instance = CartAPI()
+    
     var cartData = [CartModel]()
-//    var cartModal = CartModel()
     func FetchcartData(userID: Int, completion: @escaping (_ Success: Bool)-> ()) {
         let url = URLS.cartURL
         
@@ -44,7 +44,7 @@ class CartAPI {
                         model.id = item["id"]?.int
                         model.image = item["img"]?.string
                         model.category = item["category"]?.string
-                        model.price = item["price"]?.string
+                        model.price = Int(item["price"]?.string ?? "0")
                         model.textOfImage = item["text_of_img"]?.string
                         model.maxCount = item["max_count"]?.string
                         model.created_at = item["created_at"]?.string
@@ -57,17 +57,14 @@ class CartAPI {
         }
     }
     
-    func sendOrderData(OrderID: [String: Int], completion: @escaping (_ Success: Bool)-> ()) {
-        let url = URLS.orderURL
-        
-        let parameter = [String: Any]()
-//            "id_product": productID[0],
-//            "count_of_product": countOfProduct[0],
-//            "id_user": userID,
-//            "total": total
-            
+    func updateItemsCountAt(index: Int, value: Int) {
+        cartData[index].amount = value
+    }
     
-        Alamofire.request(url, method: .post, parameters: parameter, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+    func sendOrderData(OrderParameters: [String: Int], completion: @escaping (_ Success: Bool)-> ()) {
+        
+        let url = URLS.orderURL
+        Alamofire.request(url, method: .post, parameters: OrderParameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result {
                 case .failure(let error):
                     completion(false)
@@ -75,6 +72,7 @@ class CartAPI {
             
                 case .success(let value):
                     print(value)
+                completion(true)
             }
         }
     }

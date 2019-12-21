@@ -10,20 +10,16 @@ import UIKit
 
 class CartViewController: UIViewController {
     
-    var stepperCounter = 0
-    var totalAmount: Int = 0 {
-           didSet {
-            totalLabel.text = String(totalAmount)
-           }
-       }
-
-
     @IBOutlet weak var cartCollectionView: UICollectionView!
     @IBOutlet weak var totalLabel: UILabel!
     
+    var totalAmount: Int = 0 {
+        didSet {
+         totalLabel.text = String(totalAmount)
+        }
+    }
     var cartData = [CartModel]()
     let userID = Helper.getAuthToken()
-    var cart = CartModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,25 +46,27 @@ class CartViewController: UIViewController {
     }
     
     private func setTotalValue() {
-        let total =  cartData.compactMap({ $0.price }).reduce(0) { total, price in
-            total + (Int(price) ?? 0) }
+        let prices = cartData.compactMap() { data in
+            (data.price ?? 0) * data.amount
+        }
+        let total = prices.reduce(0) { total, price in
+            total + price }
         self.totalAmount = total
     }
     
-    var orderID = [String:Int]()
+    var orderID = [String: Int]()
     var countOfProduct: String?
     
     @IBAction func orderPressed(_ sender: Any) {
         
         for (index, idNumber) in self.cartData.enumerated() {
-            orderID = ["id_product[\(index)]": idNumber.id!]
-            orderID["id_user[\(index)]"] = userID
-            orderID["total"] = Int(totalLabel.text!)
-            orderID["count_of_product"] = Int(countOfProduct ?? "")
-            print(countOfProduct)
+            orderID["id_product[\(index)]"] =  idNumber.id!
+            orderID["count_of_product[\(index)]"] = idNumber.amount
         }
+        orderID["id_user"] = userID
+        orderID["total"] = Int(totalLabel.text!)
         
-        CartAPI.instance.sendOrderData(OrderID: orderID) { (Success) in
+        CartAPI.instance.sendOrderData(OrderParameters: orderID) { (Success) in
             if Success {
                 print("Order posted successfuly")
             }else {
@@ -76,8 +74,6 @@ class CartViewController: UIViewController {
             }
         }
     }
-    
-    
 }
 
 extension CartViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -88,7 +84,7 @@ extension CartViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CartCell", for: indexPath) as! CartCell
-        cell.configCell(cartData: cartData[indexPath.row])
+        cell.configCell(cartData: cartData[indexPath.row], at: indexPath.row)
         cell.stepper.maximumValue = Double(cartData[indexPath.row].maxCount!)!
         cell.stepperCounter.text = self.countOfProduct
         cell.delegate = self
@@ -107,23 +103,14 @@ extension CartViewController: UICollectionViewDelegate, UICollectionViewDataSour
 }
 
 protocol CartViewCellDelegate {
-    func onAmountChange(newAmount: Int, state: stepperState)
-}
-
-public enum stepperState {
-    case plus
-    case minus
+    func onAmountChange(newAmount: Int, at row: Int)
 }
 
 extension CartViewController: CartViewCellDelegate {
-    func onAmountChange(newAmount: Int, state: stepperState) {
-        if state == .minus {
-            self.totalAmount -= newAmount
-            self.totalLabel.text = String(totalAmount)
-        } else if state == .plus {
-            self.totalAmount += newAmount
-            self.totalLabel.text = String(totalAmount)
-        }
+    func onAmountChange(newAmount: Int, at row: Int) {
+        CartAPI.instance.updateItemsCountAt(index: row, value: newAmount)
+        cartData = CartAPI.instance.cartData
+        setTotalValue()
     }
 }
 

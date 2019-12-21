@@ -24,7 +24,8 @@ struct CartModel {
     var id: Int?
     var image: String?
     var textOfImage: String?
-    var price: String?
+    var price: Int?
+    var amount: Int = 1
     var maxCount: String?
     var category: String?
     var created_at: String?

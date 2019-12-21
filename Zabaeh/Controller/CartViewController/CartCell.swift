@@ -17,18 +17,20 @@ class CartCell: UICollectionViewCell {
     @IBOutlet weak var stepperCounter: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     
-    var cartStippermodel = CartModel()
-    
-    var oldCount = 0
+    var cellRow = 0
+    var price = 0.0
     var delegate: CartViewCellDelegate!
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
-    func configCell(cartData: CartModel) {
-        cartStippermodel = cartData
-        priceLabel.text = cartData.price
+    func configCell(cartData: CartModel, at row: Int) {
+        priceLabel.text = String(cartData.price ?? 0)
+        stepperCounter.text = String(cartData.amount)
+        stepper.value = Double(cartData.amount)
+        cellRow = row
+        self.price = Double(cartData.price ?? 0)
         nameLabel.text = cartData.textOfImage
         if let image = cartData.image {
             cartImageCell.kf.indicatorType = .activity
@@ -37,16 +39,9 @@ class CartCell: UICollectionViewCell {
     }
     
     @IBAction func stepperPressed(_ sender: Any) {
-        if oldCount > Int(stepper.value) {
-            delegate.onAmountChange(newAmount: Int(stepper.stepValue * Double((cartStippermodel.price)!)!), state: .minus)
-        }
-        else {
-            delegate.onAmountChange(newAmount: Int(stepper.stepValue * Double((cartStippermodel.price)!)!), state: .plus)
-        }
-        
-        
+        delegate.onAmountChange(newAmount: Int(stepper.value), at: cellRow )
         stepperCounter.text = String(Int(stepper.value))
-        let priceText = Int(stepper.value) * (Int(cartStippermodel.price ?? "") ?? 0)
+        let priceText = Int(stepper.value) * Int(price)
         priceLabel.text = String(priceText)
     }
 }
